@@ -1,5 +1,9 @@
 # Zelda-python
 
+Learning to devlope a game in Python with Pygame. Thanks to Clear code.
+
+This codebase is published under the Creative Commons Zero (CC0) license.
+
 ## pre-requisites
 
 ```sh
@@ -14,7 +18,7 @@ pyenv local 3.10.4
 
 ### Mac OSX
 
-```
+```sh
 echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
 
 # PATH=$(pyenv root)/shims:$PATH
