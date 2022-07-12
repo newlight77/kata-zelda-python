@@ -6,6 +6,7 @@ class Player(pygame.sprite.Sprite):
 		self.image = pygame.image.load('assets/graphics/test/player.png').convert_alpha()
 		self.rect = self.image.get_rect(topleft = pos)
 		self.direction = pygame.math.Vector2(0,0)
+		self.speed = 5
 
 	def input(self):
 		keys = pygame.key.get_pressed()
@@ -19,5 +20,9 @@ class Player(pygame.sprite.Sprite):
 		if keys[pygame.K_DOWN]:
 			self.direction.y = 1
 
+	def move(self, speed):
+		self.rect.center += self.direction * self.speed
+
 	def update(self):
 		self.input()
+		self.move(self.speed)
