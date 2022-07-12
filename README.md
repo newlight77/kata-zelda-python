@@ -12,36 +12,13 @@ pip3 install -U pipenv
 
 pyenv install 3.10.4
 pyenv global 3.10.4
-
-pyenv local 3.10.4
+# or pyenv local 3.10.4
 ```
-
-### Mac OSX
 
 ```sh
 echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
 
 # PATH=$(pyenv root)/shims:$PATH
-```
-
-## Setup project
-
-```sh
-# To find the location of the virtual environment
-pipenv --venv
-
-# check which dependencies are mismatched
-pipenv check
-
-# see which sub-dependencies are installed by packages
-pipenv graph --reverse
-
-# installing new dependencies
-pipenv install python-dotenv colorlog gunicorn
-pipenv install email-listener 
-
-# install dev dependencies for use during development
-pipenv install --dev yapf
 ```
 
 ## Project Structure
@@ -50,17 +27,19 @@ pipenv install --dev yapf
 .
 ├── .gitignore
 ├── .python-version
-├── Makefile
 ├── main.py
-├── makefile
+├── Makefile
 ├── Pipfile
 ├── Pipfile.lock
 ├── README.md
 ├── setup.cfg
+├── assets
+    └── audio
+    └── graphics
+    └── map
 ├── config
 │   ├── __init__.py
-│   ├── default.py
-│   ├── gunicorn.py
+│   ├── defaultenv
 │   └── logger.py
 │   └── pygame.py
 ├── src
@@ -83,18 +62,11 @@ pipenv install --dev yapf
 
 ```sh
 # set up Pipenv in your project
-pipenv install
-
-# activate the virtual environment
-pipenv shell
+#pyenv install 3.10.4
+#pipenv shell
+make install
 
 # launch the game 
-ENV=ci gunicorn --reload --config config/gunicorn.conf.py main:run
-```
-
-## Deploy
-
-```sh
-# Deploying
-pipenv install --deploy
+#python main.py
+make run
 ```
