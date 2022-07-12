@@ -2,6 +2,7 @@ import pygame
 from config.pygame import TILESIZE
 from src.settings import WORLD_MAP
 from src.tile import Tile
+from src.player import Player
 
 
 class Level:
@@ -24,6 +25,8 @@ class Level:
 				y = row_index * TILESIZE
 				if col == 'x':
 					Tile((x,y),[self.visible_sprites,self.obstacle_sprites])
+				if col == 'p':
+					Player((x,y),[self.visible_sprites])
 
 	def run(self):
 		# update and draw the game
