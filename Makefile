@@ -16,6 +16,10 @@ install:
 	@pipenv install
 	@pipenv shell
 
+shell:
+	@pipenv install
+	@pipenv shell
+
 lint:
 	@./tools/linter/lint.sh
 

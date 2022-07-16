@@ -1,10 +1,11 @@
-import pygame 
+import pygame
 
 class Player(pygame.sprite.Sprite):
-	def __init__(self,pos,groups,obstacle_sprites):
+	def __init__(self, pos, groups, obstacle_sprites):
 		super().__init__(groups)
 		self.image = pygame.image.load('assets/graphics/test/player.png').convert_alpha()
-		self.rect = self.image.get_rect(topleft = pos)
+		self.rect = self.image.get_rect(topleft=pos)
+		self.hitbox = self.rect.inflate(0, -26)
 		self.direction = pygame.math.Vector2(0, 0)
 		self.speed = 5
 		self.obstacle_sprites = obstacle_sprites
@@ -47,7 +48,7 @@ class Player(pygame.sprite.Sprite):
 						self.rect.bottom = sprite.rect.top
 					if self.direction.y < 0: # moving up
 						self.rect.top = sprite.rect.bottom
-    
+
 	def update(self):
 		self.input()
 		self.move(self.speed)
