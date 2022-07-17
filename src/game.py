@@ -1,6 +1,6 @@
 import pygame, sys
 from src.level import Level
-from config.pygame import FPS, HEIGTH, WIDTH
+from config.settings import FPS, HEIGTH, WIDTH
 
 class Game:
 	def __init__(self):
