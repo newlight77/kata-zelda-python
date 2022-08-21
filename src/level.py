@@ -6,6 +6,7 @@ from src.debug import debug
 from src.tile import Tile
 from src.player import Player
 from src.weapon import Wapon
+from src.ui import UI
 from random import choice
 
 
@@ -55,7 +56,13 @@ class Level:
 							large_object = graphics['object'][int(col)]
 							Tile((x,y), [self.visible_sprites,self.obstacle_sprites],'object',large_object)
 
-		self.player =  Player((2000,1430),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)
+		self.player = Player(
+            (2000, 1430),
+            [self.visible_sprites],
+            self.obstacle_sprites,
+            self.create_attack,
+            self.destroy_attack
+        )
 
 	def create_attack(self):
 		self.current_attack = Wapon(self.player, [self.visible_sprites])

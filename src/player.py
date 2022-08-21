@@ -80,13 +80,11 @@ class Player(pygame.sprite.Sprite):
 				self.attacking = True
 				self.attack_time = pygame.time.get_ticks()
 				self.create_attack()
-				print('attack')
 
 			# magic input
 			if keys[pygame.K_LCTRL]:
 				self.attacking = True
 				self.attack_time = pygame.time.get_ticks()
-				print('magic')
     
 			if keys[pygame.K_q] and self.can_switch_weapon:
 				self.can_switch_weapon = False
