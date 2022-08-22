@@ -7,8 +7,8 @@ from src.tile import Tile
 from src.player import Player
 from src.weapon import Wapon
 from src.ui import UI
+from src.enemy import Enemy
 from random import choice
-
 
 class Level:
 	def __init__(self):
@@ -34,6 +34,7 @@ class Level:
 			'boundary': import_csv_layout('assets/map/map_FloorBlocks.csv'),
 			'grass': import_csv_layout('assets/map/map_Grass.csv'),
 			'object': import_csv_layout('assets/map/map_Objects.csv'),
+			'entities': import_csv_layout('assets/map/map_Entities.csv')
 		}
 
 		graphics = {
@@ -55,15 +56,23 @@ class Level:
 						if (style == 'object'):
 							large_object = graphics['object'][int(col)]
 							Tile((x,y), [self.visible_sprites,self.obstacle_sprites],'object',large_object)
-
-		self.player = Player(
-            (2000, 1430),
-            [self.visible_sprites],
-            self.obstacle_sprites,
-            self.create_attack,
-            self.destroy_attack,
-            self.create_magic
-        )
+						if (style == 'entities'):
+							if col == '394':
+								self.player = Player(
+									(x, y),
+									[self.visible_sprites],
+									self.obstacle_sprites,
+									self.create_attack,
+									self.destroy_attack,
+									self.create_magic
+								)
+							else:
+								if col == '390': monster_name = 'bamboo'
+								elif col == '391': monster_name = 'spirit'
+								elif col == '392': monster_name = 'raccoon'
+								elif col == '393': monster_name = 'squid'
+								else: monster_name = 'squid'
+								Enemy(monster_name,(x,y),[self.visible_sprites])
 
 	def create_attack(self):
 		self.current_attack = Wapon(self.player, [self.visible_sprites])
