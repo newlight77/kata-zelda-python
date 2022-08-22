@@ -5,7 +5,7 @@ from config.settings import monster_data
 
 
 class Enemy(Entity):
-    def __init__(self, monster_name, pos, groups, obstacle_sprites):
+    def __init__(self, monster_name, pos, groups, obstacle_sprites, damage_player):
 
         # general setup
         super().__init__(groups)
@@ -37,6 +37,7 @@ class Enemy(Entity):
         self.can_attack = True
         self.attack_time = None
         self.attack_cooldown = 400
+        self.damage_player = damage_player
 
         # invincibility timer
         self.vulnerable = True
@@ -76,7 +77,7 @@ class Enemy(Entity):
     def actions(self, player):
         if self.status == 'attack':
             self.attack_time = pygame.time.get_ticks()
-            print('attack')
+            self.damage_player(self.attack_damage, self.attack_type)
         elif self.status == 'move':
             self.direction = self.get_player_distance_direction(player)[1]
         else:
@@ -95,7 +96,6 @@ class Enemy(Entity):
         self.rect = self.image.get_rect(center=self.hitbox.center)
         
         if not self.vulnerable:
-            # flicker
             alpha = self.wave_value()
             self.image.set_alpha(alpha)
             pass
@@ -119,7 +119,7 @@ class Enemy(Entity):
                 self.health -= player.get_full_weapon_damage()
                 print(f'enemy health={self.health}')
             else:
-                pass # magi damage
+                pass # magic damage
             self.hit_time = pygame.time.get_ticks()
             self.vulnerable = False
         
