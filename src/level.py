@@ -72,7 +72,7 @@ class Level:
 								elif col == '392': monster_name = 'raccoon'
 								elif col == '393': monster_name = 'squid'
 								else: monster_name = 'squid'
-								Enemy(monster_name,(x,y),[self.visible_sprites])
+								Enemy(monster_name,(x,y),[self.visible_sprites],self.obstacle_sprites)
 
 	def create_attack(self):
 		self.current_attack = Wapon(self.player, [self.visible_sprites])
@@ -92,6 +92,7 @@ class Level:
 		# self.visible_sprites.draw(self.display_surface)
 		self.visible_sprites.custom_draw(self.player)
 		self.visible_sprites.update()
+		self.visible_sprites.enemy_update(self.player)
 		self.ui.display(self.player)
 
 
@@ -123,3 +124,8 @@ class YSortCameraGroup(pygame.sprite.Group):
 		for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery):
 			offset_pos = sprite.rect.topleft - self.offset
 			self.display_surface.blit(sprite.image,offset_pos)
+
+	def enemy_update(self,player):
+		enemy_sprites = [sprite for sprite in self.sprites() if hasattr(sprite,'sprite_type') and sprite.sprite_type == 'enemy']
+		for enemy in enemy_sprites:
+			enemy.enemy_update(player)
