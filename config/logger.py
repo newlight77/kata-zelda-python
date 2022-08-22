@@ -1,12 +1,14 @@
-import os
 import logging
 import colorlog
 from logging.config import dictConfig
 
+
 class InfoFilter(logging.Filter):
     def filter(self, record):
         # INFO and WARNING should be shown
+        colorlog.LevelFormatter()
         return record.levelno < logging.ERROR
+
 
 class RemoveLevelFilter(object):
     def __init__(self, levelToSkip):
@@ -24,6 +26,7 @@ class RemoveLevelFilter(object):
             50: "CRITICAL"
         }
         return switcher.get(levelno, "INFO")
+
 
 def configure_logger(config):
 

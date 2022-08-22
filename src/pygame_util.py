@@ -1,6 +1,7 @@
 from os import walk
 import pygame
 
+
 def import_folder(path):
     surface_list = []
     for _, __, img_files in walk(path):
@@ -10,5 +11,5 @@ def import_folder(path):
             surface_list.append(surface)
     return surface_list
 
-import_folder('../assets/graphics/grass')
 
+import_folder('../assets/graphics/grass')

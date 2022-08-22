@@ -16,6 +16,7 @@ def ignore(path):
         return True
     return False
 
+
 def process(py_source, max_complexity):
     code = open(py_source, "r").read()
     tree = compile(code, py_source, "exec", ast.PyCF_ONLY_AST)

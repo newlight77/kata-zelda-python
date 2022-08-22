@@ -32,7 +32,7 @@ class Enemy(Entity):
         self.attack_radius = monster_info['attack_radius']
         self.notice_radius = monster_info['notice_radius']
         self.attack_type = monster_info['attack_type']
-        
+
         # player interaction
         self.can_attack = True
         self.attack_time = None
@@ -99,7 +99,7 @@ class Enemy(Entity):
         self.move(self.speed)
         self.animate()
         self.cooldown()
-        
-    def enemy_update(self,player):
+
+    def enemy_update(self, player):
         self.get_status(player)
         self.actions(player)

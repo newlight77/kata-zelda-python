@@ -6,7 +6,7 @@ echo "root dir = $ROOT_DIR"
 
 echo "****************************************************************"
 echo "executing pycodestyle"
-pycodestyle .
+pycodestyle --max-line-length=120 .
 
 echo "****************************************************************"
 echo "executing pyflakes"
