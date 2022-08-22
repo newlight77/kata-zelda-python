@@ -13,12 +13,15 @@ SHELL := /bin/sh
 install:
 	@pyenv install 3.10.4
 	# @pyenv local 3.10.4
-	@pipenv install
+	@pipenv install --dev
 	@pipenv shell
 
 shell:
-	@pipenv install
+	@pipenv install --dev
 	@pipenv shell
+
+sync:
+	@pipenv sync --dev
 
 lint:
 	@./tools/linter/lint.sh
