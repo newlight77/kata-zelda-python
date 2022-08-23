@@ -32,12 +32,18 @@ class AnimationPlayer:
                 import_folder('assets/graphics/particles/leaf4'),
                 import_folder('assets/graphics/particles/leaf5'),
                 import_folder('assets/graphics/particles/leaf6'),
-                self.reflect_images(import_folder( 'assets/graphics/particles/leaf1')),
-                self.reflect_images(import_folder( 'assets/graphics/particles/leaf2')),
-                self.reflect_images(import_folder( 'assets/graphics/particles/leaf3')),
-                self.reflect_images(import_folder( 'assets/graphics/particles/leaf4')),
-                self.reflect_images(import_folder( 'assets/graphics/particles/leaf5')),
-                self.reflect_images(import_folder( 'assets/graphics/particles/leaf6'))
+                self.reflect_images(import_folder(
+                    'assets/graphics/particles/leaf1')),
+                self.reflect_images(import_folder(
+                    'assets/graphics/particles/leaf2')),
+                self.reflect_images(import_folder(
+                    'assets/graphics/particles/leaf3')),
+                self.reflect_images(import_folder(
+                    'assets/graphics/particles/leaf4')),
+                self.reflect_images(import_folder(
+                    'assets/graphics/particles/leaf5')),
+                self.reflect_images(import_folder(
+                    'assets/graphics/particles/leaf6'))
             )
         }
 
@@ -61,6 +67,7 @@ class AnimationPlayer:
 class ParticleEffect(pygame.sprite.Sprite):
     def __init__(self, pos, animation_frames, groups):
         super().__init__(groups)
+        self.sprite_type = 'magic'
         self.frame_index = 0
         self.animation_speed = 0.15
         self.frames = animation_frames

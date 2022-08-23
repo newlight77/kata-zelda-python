@@ -18,11 +18,9 @@ class Player(Entity):
         self.status = 'down'
 
         # movement
-        self.speed = 5
         self.attacking = False
         self.attack_cooldown = 400
         self.attack_time = None
-
         self.obstacle_sprites = obstacle_sprites
 
         # weapon
@@ -44,8 +42,8 @@ class Player(Entity):
         # stats
         self.stats = {'health': 100, 'energy': 60,
                       'attack': 10, 'magic': 4, 'speed': 5}
-        self.health = self.stats['health']
-        self.energy = self.stats['energy']
+        self.health = self.stats['health'] * 0.5
+        self.energy = self.stats['energy'] * 0.8
         self.exp = 123
         self.speed = self.stats['speed']
 
@@ -100,7 +98,8 @@ class Player(Entity):
                 self.attacking = True
                 self.attack_time = pygame.time.get_ticks()
                 style = list(magic_data.keys())[self.magic_index]
-                strength = list(magic_data.values())[self.magic_index]['strength'] + self.stats['magic']
+                strength = list(magic_data.values())[
+                    self.magic_index]['strength'] + self.stats['magic']
                 cost = list(magic_data.values())[self.magic_index]['cost']
                 self.create_magic(style, strength, cost)
 
@@ -127,23 +126,23 @@ class Player(Entity):
                 self.magic = list(magic_data.keys())[self.magic_index]
 
     def get_status(self):
+
         # idle status
         if self.direction.x == 0 and self.direction.y == 0:
-            if 'idle' not in self.status and not 'attack' in self.status:
+            if not 'idle' in self.status and not 'attack' in self.status:
                 self.status = self.status + '_idle'
 
-        # attacking
         if self.attacking:
             self.direction.x = 0
             self.direction.y = 0
-            if 'attack' not in self.status:
+            if not 'attack' in self.status:
                 if 'idle' in self.status:
-                    self.status = self.status.replace('_idle','_attack')
+                    self.status = self.status.replace('_idle', '_attack')
                 else:
                     self.status = self.status + '_attack'
         else:
             if 'attack' in self.status:
-                self.status = self.status.replace('_attack','')
+                self.status = self.status.replace('_attack', '')
 
     def cooldowns(self):
         current_time = pygame.time.get_ticks()
@@ -189,9 +188,21 @@ class Player(Entity):
         weapon_damage = weapon_data[self.weapon]['damage']
         return base_damage + weapon_damage
 
+    def get_full_magic_damage(self):
+        base_damage = self.stats['magic']
+        spell_damage = magic_data[self.magic]['strength']
+        return base_damage + spell_damage
+
+    def energy_recovery(self):
+        if self.energy < self.stats['energy']:
+            self.energy += 0.01 * self.stats['magic']
+        else:
+            self.energy = self.stats['energy']
+
     def update(self):
         self.input()
         self.cooldowns()
         self.get_status()
         self.animate()
         self.move(self.speed)
+        self.energy_recovery()
