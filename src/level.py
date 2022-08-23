@@ -131,7 +131,7 @@ class Level:
             self.player.vulnerable = False
             self.player.hurt_time = pygame.time.get_ticks()
             print(f'player health={self.player.health}')
-            # spawn particles
+            self.animation_player.create_particles(attack_type, self.player.rect.center, [self.visible_sprites])
 
     def trigger_death_particles(self,pos,particle_type):
         self.animation_player.create_particles(particle_type,pos,self.visible_sprites)
