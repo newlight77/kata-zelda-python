@@ -38,6 +38,10 @@ class Player(Entity):
         self.magic = list(magic_data.keys())[self.magic_index]
         self.can_switch_magic = True
         self.magic_switch_time = None
+        
+        # import sound
+        self.weapong_attack_sound = pygame.mixer.Sound('assets/audio/sword.wav')
+        self.weapong_attack_sound.set_volume(0.4)
 
         # stats
         self.stats = {'health': 100, 'energy': 60,
@@ -96,6 +100,7 @@ class Player(Entity):
                 self.attacking = True
                 self.attack_time = pygame.time.get_ticks()
                 self.create_attack()
+                self.weapong_attack_sound.play()
 
             # magic input
             if keys[pygame.K_LCTRL]:
