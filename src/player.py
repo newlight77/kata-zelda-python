@@ -1,7 +1,7 @@
 from email.mime import base
 import pygame
 from src.pygame_util import import_folder
-from config.settings import weapon_data, magic_data
+from config.settings import weapon_data, magic_data, HITBOX_OFFSET
 from src.entity import Entity
 
 
@@ -11,7 +11,7 @@ class Player(Entity):
         self.image = pygame.image.load(
             'assets/graphics/test/player.png').convert_alpha()
         self.rect = self.image.get_rect(topleft=pos)
-        self.hitbox = self.rect.inflate(0, -26)
+        self.hitbox = self.rect.inflate(-6, HITBOX_OFFSET['player'])
 
         # graphics setup
         self.import_player_assets()
